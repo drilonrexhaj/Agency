@@ -1,0 +1,9 @@
+[user]
+  name = "N'HAP Agency Developer"
+  email = "dev@nhap-agency.com"
+
+[core]
+  excludesfile = .gitignore
+
+[init]
+  defaultBranch = main

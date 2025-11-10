@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - N'HAP Agency</title>
+    <link rel="stylesheet" href="admin.css">
+    <link href="https://cdn.jsdelivr.net/npm/huge-icons@0.0.38/font/styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="admin-container">
+        <aside class="admin-sidebar">
+            <div class="admin-logo">
+                <h1>N'HAP Admin</h1>
+            </div>
+            <nav class="admin-nav">
+                <a href="index.html" class="nav-link">← Kthe në Website</a>
+                <a href="#" class="nav-link active" data-tab="messages">
+                    <i class="hi hi-mail"></i> Mesazhet
+                </a>
+            </nav>
+        </aside>
+
+        <main class="admin-main">
+            <header class="admin-header">
+                <h2>Mesazhet e Kontaktit</h2>
+                <div class="admin-filters">
+                    <button class="filter-btn active" data-filter="all">Të Gjitha</button>
+                    <button class="filter-btn" data-filter="unread">Të Palexuara</button>
+                    <button class="filter-btn" data-filter="read">Të Lexuara</button>
+                </div>
+            </header>
+
+            <div class="messages-container">
+                <div id="messagesList" class="messages-list"></div>
+            </div>
+
+            <div id="emptyState" class="empty-state" style="display: none;">
+                <i class="hi hi-inbox"></i>
+                <h3>Nuk ka mesazhe</h3>
+                <p>Aktualisht nuk ka mesazhe në këtë filtër</p>
+            </div>
+        </main>
+    </div>
+
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Detajet e Mesazhit</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="message-detail">
+                    <div class="detail-row">
+                        <label>Emri:</label>
+                        <p id="modalName"></p>
+                    </div>
+                    <div class="detail-row">
+                        <label>Email:</label>
+                        <p id="modalEmail"></p>
+                    </div>
+                    <div class="detail-row">
+                        <label>Telefoni:</label>
+                        <p id="modalPhone"></p>
+                    </div>
+                    <div class="detail-row">
+                        <label>Mesazhi:</label>
+                        <p id="modalMessage"></p>
+                    </div>
+                    <div class="detail-row">
+                        <label>Data:</label>
+                        <p id="modalDate"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="markReadBtn" class="btn btn-primary">Shëno si Lexuar</button>
+                <button id="deleteBtn" class="btn btn-danger">Fshij</button>
+                <button class="btn btn-secondary modal-close-btn">Mbyll</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+{
+  "project": {
+    "name": "N'HAP Agency Backend",
+    "type": "backend",
+    "description": "Backend API for N'HAP Agency landing page with contact form"
+  },
+  "backend": {
+    "runtime": "cloudflare_workers",
+    "language": "typescript",
+    "entry_point": "backend/src/index.ts",
+    "config_file": "backend/wrangler.toml"
+  },
+  "database": {
+    "type": "d1",
+    "schema_file": "backend/schema.sql",
+    "tables": [
+      {
+        "name": "contact_messages",
+        "description": "Contact form submissions from visitors",
+        "columns": {
+          "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+          "name": "TEXT NOT NULL",
+          "email": "TEXT NOT NULL",
+          "phone": "TEXT",
+          "message": "TEXT NOT NULL",
+          "created_at": "TEXT DEFAULT CURRENT_TIMESTAMP",
+          "status": "TEXT DEFAULT 'unread'",
+          "ip_address": "TEXT",
+          "user_agent": "TEXT"
+        }
+      }
+    ]
+  },
+  "api": {
+    "base_url": "/api",
+    "endpoints": [
+      {
+        "method": "POST",
+        "path": "/contact",
+        "description": "Submit a contact form message",
+        "request_body": {
+          "name": "string",
+          "email": "string",
+          "phone": "string (optional)",
+          "message": "string"
+        },
+        "response": {
+          "success": "boolean",
+          "message": "string",
+          "data": {
+            "id": "number",
+            "created_at": "string"
+          }
+        }
+      },
+      {
+        "method": "GET",
+        "path": "/contact/messages",
+        "description": "Retrieve all contact messages (admin only)",
+        "auth": "admin",
+        "response": {
+          "success": "boolean",
+          "data": [
+            {
+              "id": "number",
+              "name": "string",
+              "email": "string",
+              "message": "string",
+              "created_at": "string",
+              "status": "string"
+            }
+          ]
+        }
+      },
+      {
+        "method": "PUT",
+        "path": "/contact/{id}",
+        "description": "Update message status (admin only)",
+        "auth": "admin",
+        "request_body": {
+          "status": "string"
+        },
+        "response": {
+          "success": "boolean",
+          "message": "string"
+        }
+      },
+      {
+        "method": "DELETE",
+        "path": "/contact/{id}",
+        "description": "Delete a message (admin only)",
+        "auth": "admin",
+        "response": {
+          "success": "boolean",
+          "message": "string"
+        }
+      }
+    ]
+  },
+  "deployment": {
+    "platform": "youware_backend",
+    "environment_variables": {
+      "ENVIRONMENT": "production",
+      "CORS_ORIGIN": "*",
+      "DB_TIMEOUT": "5000"
+    },
+    "build_command": "cd backend && npm run build",
+    "deploy_command": "cd backend && npm run deploy"
+  },
+  "frontend": {
+    "contact_form_endpoint": "/api/contact",
+    "admin_dashboard": "admin.html",
+    "admin_messages_local_storage_key": "adminMessages"
+  }
+}

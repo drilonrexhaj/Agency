@@ -1,0 +1,3 @@
+- [x] Update index.html: Replace text logo with image in navbar
+- [x] Update stili.css: Style the logo image and change color scheme to purple/magenta
+- [x] Test the changes in browser for visual appeal
