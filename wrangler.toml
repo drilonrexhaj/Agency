@@ -1,0 +1,14 @@
+name = "nhap-agency-api"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# D1 Database binding
+[[d1_databases]]
+binding = "DB"
+database_name = "nhap_agency"
+database_id = "placeholder-db-id"
+
+# Environment configuration
+[env.production]
+name = "nhap-agency-api-prod"
